@@ -3,7 +3,7 @@ namespace Modular\Blocks;
 
 use Modular\Interfaces\HasLinks;
 
-class Files extends Block implements HasLinks {
+class Files extends \Modular\Block implements HasLinks {
 	private static $upload_folder = '';
 
 	private static $allowed_files = '';

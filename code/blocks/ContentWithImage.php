@@ -1,6 +1,6 @@
 <?php
 namespace Modular\Blocks;
 
-class ContentWithImage extends Block {
-	
+class ContentWithImage extends \Modular\Block {
+
 }

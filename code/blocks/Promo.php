@@ -1,7 +1,7 @@
 <?php
 namespace Modular\Blocks;
 
-class Promo extends Block {
+class Promo extends \Modular\Block {
 	private static $db = [
 		"BackgroundColor" => "Enum('white-bg,brown-bg','white-bg')",
 	];

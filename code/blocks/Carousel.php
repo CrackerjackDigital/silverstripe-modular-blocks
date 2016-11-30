@@ -1,6 +1,6 @@
 <?php
 namespace Modular\Blocks;
 
-class Carousel extends Block {
+class Carousel extends \Modular\Block {
 
 }

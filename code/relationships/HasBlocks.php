@@ -1,6 +1,6 @@
 <?php
 namespace Modular\Relationships;
-use Modular\Blocks\Block;
+use Modular\Block;
 
 /**
  * Add a gridfield to which blocks can be added and managed.
@@ -9,8 +9,8 @@ use Modular\Blocks\Block;
  */
 class HasBlocks extends HasManyMany {
 	const RelationshipName    = 'Blocks';
-	const RelatedClassName    = 'Modular\Blocks\Block';
-	const GridFieldConfigName = 'Modular\GridField\HasBlocksGridFieldConfig';
+	const RelatedClassName    = 'Modular\Block';
+	const GridFieldConfigName = 'Modular\GridField\Configs\HasBlocks';
 
 	const RulesExcludePrefix = '!';
 	const RulesDelimeter     = ',';

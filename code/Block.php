@@ -1,8 +1,7 @@
 <?php
-namespace Modular\Blocks;
+namespace Modular;
 
 use Modular\Interfaces\LinkType;
-use Modular\Model;
 
 /**
  * Class which represents a block which can be added to an Article, of types ( in display order ). The types in the grid dropdown are determined by
@@ -17,7 +16,7 @@ use Modular\Model;
  * 'Download',
  * 'Pull Quote'
  */
-class Block extends \Modular\VersionedModel implements LinkType {
+class Block extends \Modular\Model implements LinkType {
 	private static $template = '';
 
 	private static $summary_fields = [

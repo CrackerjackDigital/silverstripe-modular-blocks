@@ -4,7 +4,7 @@ namespace Modular\Blocks;
 use ArrayList;
 use Modular\Interfaces\Imagery;
 
-class FullWidthImage extends Block implements Imagery {
+class FullWidthImage extends \Modular\Block implements Imagery {
 
 	private static $allowed_files = 'image';
 

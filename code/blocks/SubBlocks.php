@@ -5,6 +5,6 @@ namespace Modular\Blocks;
  * to the Block itself, so in config it also has 'HasBlocks' extension.
  */
 
-class SubBlocks extends Block {
+class SubBlocks extends \Modular\Block {
 
 }

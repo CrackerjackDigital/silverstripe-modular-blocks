@@ -1,21 +1,20 @@
 <?php
 namespace Modular\Relationships;
 
-use Modular\Blocks\Block;
+use Modular\Block;
 use ValidationException;
 use Modular\Model;
 use DropdownField;
 use ValidationResult;
-use Modular\Fields\Field;
 use Controller;
 
 /**
  * Class which adds a single block to a model
  */
 
-class HasBlock extends Field {
+class HasBlock extends \Modular\Field {
 	const RelationshipName = 'Block';
-	const BlockClassName = 'Modular\Blocks\Block';
+	const BlockClassName = 'Modular\Block';
 	const RelationshipFieldName = 'BlockID';
 
 	// not in database, just UI selector for the class of the related block which could be

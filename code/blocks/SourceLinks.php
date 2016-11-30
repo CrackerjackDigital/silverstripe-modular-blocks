@@ -1,5 +1,5 @@
 <?php
 namespace Modular\Blocks;
 
-class SourceLinks extends Block {
+class SourceLinks extends \Modular\Block {
 }
