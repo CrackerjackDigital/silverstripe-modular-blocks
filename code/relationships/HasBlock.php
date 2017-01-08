@@ -40,12 +40,14 @@ class HasBlock extends \Modular\Field {
 	public function getBlockType() {
 		return $this()->{self::BlockTypeFieldName} ?: ($this()->Block() ? $this()->Block()->ClassName : '');
 	}
-
+	
 	/**
 	 * Add the BlockType dropdown selector for the extended model.
+	 *
+	 * @param $mode
 	 * @return array
 	 */
-	public function cmsFields() {
+	public function cmsFields($mode) {
 		$blockType = $this->getBlockType();
 
 		return [
