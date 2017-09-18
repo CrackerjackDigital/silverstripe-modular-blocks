@@ -3,14 +3,14 @@ namespace Modular\Models;
 
 class Slide extends \Modular\Model {
 	const SortFieldName = 'Sort';
-	const RelationshipName = 'CarouselBlock';
-	const RelatedClassName = 'Modular\Block';
+	const Name = 'CarouselBlock';
+	const Schema = 'Modular\Models\Block';
 
 	private static $db = [
 		self::SortFieldName => 'Int'
 	];
 	private static $has_one = [
-		self::RelationshipName => self::RelatedClassName
+		self::Name => self::Schema
 	];
 	private static $summary_fields = [
 		'Title' => 'Title',

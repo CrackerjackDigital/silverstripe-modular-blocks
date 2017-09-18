@@ -1,5 +1,5 @@
 <?php
-namespace Modular;
+namespace Modular\Models;
 
 use Modular\Interfaces\LinkType;
 

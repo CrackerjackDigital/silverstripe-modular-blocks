@@ -10,7 +10,7 @@ use Modular\Models\InternalOrExternalLink;
  * @package Modular\Blocks
  * @method \SS_List Links() from HasLinks extension, returns a list of InternalOrExternalLink models
  */
-class Links extends \Modular\Block implements HasLinks {
+class Links extends \Modular\Models\Block implements HasLinks {
 	/**
 	 * Implemented for HasLinks interface,
 	 * @return \SS_List of ArrayData objects with Link information.

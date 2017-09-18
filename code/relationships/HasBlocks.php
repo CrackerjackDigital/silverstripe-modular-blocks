@@ -1,21 +1,25 @@
 <?php
+
 namespace Modular\Relationships;
-use Modular\Block;
+
+use Modular\Models\Block;
+use Modular\GridField\Components\GridFieldOrderableRows;
 
 /**
- * Add a gridfield to which blocks can be added and managed.
+ * Add a gridfield to which blocks can be added and managed. A belongs_many_many relationship should be declared on Block
+ * to the model this extension is attached to.
  *
  * @method \DataList Blocks
  */
 class HasBlocks extends HasManyMany {
-	const RelationshipName    = 'Blocks';
-	const RelatedClassName    = 'Modular\Block';
-	const GridFieldConfigName = 'Modular\GridField\Configs\HasBlocks';
+	const Name                = 'Blocks';
+	const Schema              = Block::class;
+	const GridFieldConfigName = \Modular\GridField\Configs\HasBlocks::class;
 
 	const RulesExcludePrefix = '!';
 	const RulesDelimeter     = ',';
 
-	private static $cms_tab_name = 'Root.ContentBlocks';
+	private static $cms_tab_name = 'Root.Blocks';
 
 	private static $allow_new_multi_class = true;
 
@@ -53,21 +57,22 @@ class HasBlocks extends HasManyMany {
 	 *
 	 * @param string $zone
 	 * @param string $rules delimited block class names e.g. '!ExcludeThisBlockClass, AddThisBlockClass'
+	 *
 	 * @return \DataList
 	 */
-	public function ZoneBlocks($zone = 'Content', $rules = '') {
-		$this()->extend('preRenderZoneBlocks', $zone, $rules);
+	public function ZoneBlocks( $zone = 'Content', $rules = '' ) {
+		$this()->extend( 'preRenderZoneBlocks', $zone, $rules );
 
-		$map = $this()->config()->get('blocks_for_zone')
-			?: $this->config()->get('blocks_for_zone');
+		$map = $this()->config()->get( 'blocks_for_zone' )
+			?: $this->config()->get( 'blocks_for_zone' );
 
 		$includes = [];
 
-		if (isset($map[ $zone ])) {
+		if ( isset( $map[ $zone ] ) ) {
 			$includes = $map[ $zone ];
 		}
 
-		list($excludes, $additionals) = $this->parseRules($rules);
+		list( $excludes, $additionals ) = $this->parseRules( $rules );
 
 		// add additional blocks from rules and make sure they are unique
 		$includes = array_unique(
@@ -79,11 +84,12 @@ class HasBlocks extends HasManyMany {
 
 		$blocks = $this()
 			->Blocks()
-			->filter('ClassName', $includes)
-			->exclude('ClassName', $excludes)
-			->sort(\Modular\GridField\GridField::GridFieldOrderableRowsFieldName);
+			->filter( 'ClassName', $includes )
+			->exclude( 'ClassName', $excludes )
+			->sort( GridFieldOrderableRows::SortFieldName );
 
-		$this()->extend('postRenderZoneBlocks', $zone, $rules);
+		$this()->extend( 'postRenderZoneBlocks', $zone, $rules );
+
 		return $blocks;
 	}
 
@@ -91,13 +97,13 @@ class HasBlocks extends HasManyMany {
 	 * Deep publish owned blocks when the owner is published.
 	 */
 	public function onAfterPublish() {
-		if ($blocks = $this->related()) {
+		if ( $blocks = $this->related() ) {
 			/** @var Block|\Versioned $block */
-			foreach ($blocks as $block) {
-				if ($block->hasExtension('Versioned')) {
-					$block->publish('Stage', 'Live');
+			foreach ( $blocks as $block ) {
+				if ( $block->hasExtension( 'Versioned' ) ) {
+					$block->publish( 'Stage', 'Live' );
 					// now ask the block to publish it's own blocks.
-					$block->extend('onAfterPublish');
+					$block->extend( 'onAfterPublish' );
 				}
 			}
 		}
@@ -107,24 +113,26 @@ class HasBlocks extends HasManyMany {
 	 * Parse a string of rules such as '!NotBlockClass, AddBlockClass' int array of includes, excludes for filtering
 	 *
 	 * @param string|array $rules
+	 *
 	 * @return array tuple of exclude, include arrays of class names e.g. [ [ 'NotBlockClass' ], [ 'AddBlockClass'] ]
 	 */
-	protected function parseRules($rules) {
-		$rules = is_array($rules) ? $rules : array_filter(explode(static::RulesDelimeter, $rules));
+	protected function parseRules( $rules ) {
+		$rules = is_array( $rules ) ? $rules : array_filter( explode( static::RulesDelimeter, $rules ) );
 
 		$excludes = [];
 		$includes = [];
 
-		foreach ($rules as $rule) {
-			if (substr($rule, 0, 1) == static::RulesExcludePrefix) {
-				$excludes[] = substr($rule, 1);
+		foreach ( $rules as $rule ) {
+			if ( substr( $rule, 0, 1 ) == static::RulesExcludePrefix ) {
+				$excludes[] = substr( $rule, 1 );
 			} else {
 				$includes[] = $rule;
 			}
 		}
+
 		return [
 			$excludes,
-		    $includes,
+			$includes,
 		];
 	}
 }

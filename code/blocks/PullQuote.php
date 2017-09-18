@@ -1,6 +1,6 @@
 <?php
 namespace Modular\Blocks;
 
-class PullQuote extends \Modular\Block {
+class PullQuote extends \Modular\Models\Block {
 
 }

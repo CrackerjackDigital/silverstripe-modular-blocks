@@ -6,7 +6,7 @@ namespace Modular\Blocks;
  * @package Modular\Blocks
  * @method \Page InternalLink from \Modular\Fields\InternalLink field.
  */
-class LinkedPage extends \Modular\Block {
+class LinkedPage extends \Modular\Models\Block {
 	public function Page() {
 		return $this->InternalLink();
 	}

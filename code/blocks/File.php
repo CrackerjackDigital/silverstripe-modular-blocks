@@ -3,9 +3,9 @@ namespace Modular\Blocks;
 
 use Modular\Interfaces\HasLinks;
 
-class File extends \Modular\Block implements HasLinks  {
+class File extends \Modular\Models\Block implements HasLinks  {
 	// override in concrete class e.g. 'Download' or 'Video'
-	const RelationshipName = '';
+	const Name = '';
 
 	private static $upload_folder = '';
 

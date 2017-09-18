@@ -1,6 +1,6 @@
 <?php
 namespace Modular\Blocks;
 
-class Content extends \Modular\Block {
+class Content extends \Modular\Models\Block {
 
 }

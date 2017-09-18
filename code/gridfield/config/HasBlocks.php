@@ -28,7 +28,7 @@ class HasBlocks extends HasManyManyGridFieldConfig {
 
 	public static function allowed_related_classes() {
 		$out = [];
-		foreach (\ClassInfo::subclassesFor('Modular\Block') as $className) {
+		foreach (\ClassInfo::subclassesFor( \Modular\Models\Block::class) as $className) {
 			$out[ $className ] = singleton($className)->i18n_singular_name();
 		}
 		return $out;

@@ -1,13 +1,13 @@
 <?php
 namespace Modular\Extensions;
 
-use Modular\Block;
+use Modular\Models\Block;
 use Modular\Fields\Title;
 use Modular\Relationships\HasBlocks;
 
 class AddDefaultBlocks extends \Modular\Field {
-	const SingleFieldName   = 'AddDefaultBlocks';
-	const SingleFieldSchema = 'Boolean';
+	const Name   = 'AddDefaultBlocks';
+	const Schema = 'Boolean';
 
 	// this should be added to the extended view, e.g in application blocks.yml
 	// blocks added here will be appended to existing blocks in the order defined
@@ -29,8 +29,8 @@ class AddDefaultBlocks extends \Modular\Field {
 	 * If the 'add default blocks' checkbox was not set (ie not checked in UI) then set it to 0 on the model
 	 */
 	public function onBeforeWrite() {
-		if (!\Controller::curr()->getRequest()->postVar(self::SingleFieldName)) {
-			$this()->{self::SingleFieldName} = 0;
+		if (!\Controller::curr()->getRequest()->postVar(self::Name)) {
+			$this()->{self::Name} = 0;
 		}
 		// pick this up in onAfterWrite
 		$this()->WasNew = !$this()->isInDB();
@@ -43,7 +43,7 @@ class AddDefaultBlocks extends \Modular\Field {
 			/** @var \ManyManyList $existing */
 			$existing = $this()->{HasBlocks::relationship_name()}();
 
-			if ($this()->{self::SingleFieldName} || $this()->WasNew) {
+			if ( $this()->{self::Name} || $this()->WasNew) {
 
 				if ($defaultBlockClasses = $this->getDefaultBlockClasses()) {
 					// get class names along with count of each expected
@@ -77,7 +77,7 @@ class AddDefaultBlocks extends \Modular\Field {
 									),
 									$templateVars
 								);
-								/** @var Block $block */
+								/** @var \Modular\Models\Block $block */
 								$block = new $blockClass();
 								$block->update([
 									'Title' => $title,

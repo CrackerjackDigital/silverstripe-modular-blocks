@@ -1,7 +1,7 @@
 <?php
 namespace Modular\Relationships;
 
-use Modular\Block;
+use Modular\Models\Block;
 use ValidationException;
 use Modular\Model;
 use DropdownField;
@@ -10,29 +10,21 @@ use Controller;
 
 /**
  * Class which adds a single block to a model
+ *
+ * @property int BlockID
+ *
+ * @method Block Block()
+ *
  */
 
-class HasBlock extends \Modular\Field {
-	const RelationshipName = 'Block';
-	const BlockClassName = 'Modular\Block';
-	const RelationshipFieldName = 'BlockID';
+class HasBlock extends HasOne {
+	const Name = 'Block';
+	const Schema = Block::class;
 
 	// not in database, just UI selector for the class of the related block which could be
 	// set from CMS form post to something different to current associated block type, and governs
 	// creation of the associated block
 	const BlockTypeFieldName = 'BlockType';
-
-	public function extraStatics($class = null, $extension = null) {
-		$parent = parent::extraStatics($class, $extension) ?: [];
-		return array_merge_recursive(
-			$parent,
-			[
-				'has_one' => [
-					static::RelationshipName => static::BlockClassName
-				]
-			]
-		);
-	}
 
 	/**
 	 * Return the value from passed BlockType field or the class name of the current associated block
@@ -40,7 +32,7 @@ class HasBlock extends \Modular\Field {
 	public function getBlockType() {
 		return $this()->{self::BlockTypeFieldName} ?: ($this()->Block() ? $this()->Block()->ClassName : '');
 	}
-	
+
 	/**
 	 * Add the BlockType dropdown selector for the extended model.
 	 *

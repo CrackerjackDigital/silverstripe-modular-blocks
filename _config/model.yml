@@ -1,16 +1,72 @@
 ---
 Name: modular-blocks-model
 ---
+# block fields
+Modular\Blocks\Block:
+  extensions:
+    - Modular\Fields\Title
+Modular\Blocks\CarouselBlock:
+  extensions:
+    - Modular\Relationships\HasSlides
+Modular\Blocks\ContentImageLeftBlock:
+  extensions:
+    - Modular\Fields\Image
+    - Modular\Fields\Content
+Modular\Blocks\ContentImageRightBlock:
+  extensions:
+    - Modular\Fields\Image
+    - Modular\Fields\Content
+Modular\Blocks\CallToActionBlock:
+  extensions:
+    - Modular\Fields\Content
+Modular\Blocks\ContentBlock:
+  extensions:
+    - Modular\Fields\Content
 Modular\Blocks\Download:
   extensions:
     - Modular\Fields\Download
+Modular\Blocks\FilesBlock:
+  extensions:
+    - Modular\Relationships\HasFiles
+Modular\Blocks\FootnotesBlock:
+  extensions:
+    - Modular\Fields\Content
+Modular\Blocks\FullWidthImageBlock:
+  extensions:
+    - Modular\Fields\Image
+    - UseFocuspointField
+Modular\Blocks\HeroBlock:
+  extensions:
+    - Modular\Fields\Content
+    - Modular\Fields\InternalOrExternalLink
+    - Modular\Fields\Image
+Modular\Blocks\HeroSlideBlock:
+  extensions:
+    - Modular\Relationships\HasSlides
 Modular\Blocks\LinkedPage:
   extensions:
     - Modular\Fields\InternalLink
-
----
-Name: modular-blocks-relationships
----
-Modular\Blocks\Block:
-  belongs_many_many:
-    Pages: Page
+Modular\Blocks\LinksBlock:
+  extensions:
+    - Modular\Relationships\HasLinks
+Modular\Blocks\MediaPanelsBlock:
+  extensions:
+    - Modular\Fields\Title
+    - Modular\Relationships\HasBlocks
+Modular\Blocks\SourceLinksBlock:
+  extensions:
+    - Modular\Fields\Links
+Modular\Blocks\SourceFileBlock:
+  extensions:
+    - Modular\Fields\Download
+Modular\Blocks\SubBlocks:
+  extensions:
+    - Modular\Relationships\HasBlocks
+Modular\Blocks\SubscribeBlock:
+  extensions:
+    - Modular\Fields\URL
+Modular\Blocks\VideoBlock:
+  extensions:
+    - Modular\Fields\Thumbnail
+    - Modular\Fields\ExternalLink
+    - Modular\Fields\Content

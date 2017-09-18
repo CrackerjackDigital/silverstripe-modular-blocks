@@ -1,19 +1,19 @@
 <?php
 namespace Modular\Blocks;
 
-use Modular\Behaviours\InternalOrExternalLink;
 use Modular\Fields\InternalLink;
 use Modular\Fields\ExternalLink;
+use Modular\Behaviours\InternalOrExternalLink;
 
-class CallToAction extends \Modular\Block {
+class CallToAction extends \Modular\Models\Block {
 	public function ResolvedLink() {
 		if ($this->{InternalOrExternalLink::LinkTypeFieldName} == InternalLink::InternalLinkOption) {
 
-			if ($target = $this->{InternalLink::RelationshipName}()) {
+			if ($target = $this->{InternalLink::Name}()) {
 				return $target->Link();
             }
 		} elseif ($this->{InternalOrExternalLink::LinkTypeFieldName} == ExternalLink::ExternalLinkOption) {
-			return $this->{ExternalLink::SingleFieldName};
+			return $this->{ExternalLink::Name};
 		}
 	}
 
